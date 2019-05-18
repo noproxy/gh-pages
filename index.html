@@ -1,97 +1,96 @@
 <html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"><link rel="stylesheet" id="asciidoctor-browser-font-awesome-style" href="css/font-awesome.min.css"><link rel="stylesheet" id="asciidoctor-browser-style" href="css/themes/asciidoctor.css"><link rel="stylesheet" id="asciidoctor-browser-github-highlight-style" href="css/highlight/github.css"><link rel="stylesheet" id="asciidoctor-browser-chartist-style" href="css/chartist.min.css"><style type="text/css" id="asciidoctor-browser-chartist-default-style">.ct-chart .ct-series.ct-series-a .ct-line {stroke:#8EB33B} .ct-chart .ct-series.ct-series-b .ct-line {stroke:#72B3CC} .ct-chart .ct-series.ct-series-a .ct-point {stroke:#8EB33B} .ct-chart .ct-series.ct-series-b .ct-point {stroke:#72B3CC}</style><title>Project Introduction</title><script type="text/javascript" id="asciidoctor-browser-highlightjs" src="js/vendor/highlight.js/highlight.min.js"></script></head><body class="article"><div id="content"><h1>Project Introduction</h1>
-    <div id="toc" class="toc">
-        <div id="toctitle">Table of Contents</div>
-        <ul class="sectlevel1">
-            <li><a href="#_gradle_plugin_based_project">Gradle Plugin Based Project</a>
-                <ul class="sectlevel2">
-                    <li><a href="#_development_kit_for_extending_android_gradle_plugin">Development Kit for Extending Android Gradle Plugin</a></li>
-                    <li><a href="#_universal_library_integrating_solution">Universal Library Integrating Solution</a></li>
-                    <li><a href="#_distributed_smoke_test_solution">Distributed Smoke Test Solution</a></li>
-                    <li><a href="#_gradle_plugin_for_android_componentsviews_obfuscation">Gradle Plugin for Android Components/Views Obfuscation</a></li>
-                    <li><a href="#_gradle_plugin_for_variant_aware_android_library_publish">Gradle Plugin for Variant-Aware Android Library Publish</a></li>
-                    <li><a href="#_gradle_5_3">Gradle 5.3</a></li>
-                </ul>
-            </li>
-            <li><a href="#_others">Others</a>
-                <ul class="sectlevel2">
-                    <li><a href="#_intellij_idea_plugin">Intellij IDEA Plugin</a></li>
-                    <li><a href="#_android_polymerized_ad_sdk">Android Polymerized Ad SDK</a></li>
-                    <li><a href="#_android_anti_cheating_sdk">Android Anti-cheating SDK</a></li>
-                    <li><a href="#_android_crash_collector_sdk">Android Crash Collector SDK</a></li>
-                    <li><a href="#_android_linked_wakening_sdk">Android Linked Wakening SDK</a></li>
-                    <li><a href="#_android_app_one_moment_video_shot">Android App: <code>One Moment</code> Video Shot</a></li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-    <div id="preamble">
-        <div class="sectionbody">
-            <div class="paragraph">
-                <p>This an introduction to my work projects since all the projects are closed source. And the main goal is to prove that I have abilities to propose solutions to meet the complex requirements and am well qualified for developing about Gradle.</p>
-            </div>
-        </div>
-    </div>
-    <div class="sect1">
-        <h2 id="_gradle_plugin_based_project">Gradle Plugin Based Project</h2>
-        <div class="sectionbody">
-            <div class="paragraph">
-                <p>I write more than 20 close sourced Gradle plugins when working at APUS Group. I pick some of them.</p>
-            </div>
-            <div class="sect2">
-                <h3 id="_development_kit_for_extending_android_gradle_plugin">Development Kit for Extending Android Gradle Plugin</h3>
-                <div class="quoteblock">
-                    <blockquote>
-                        <div class="paragraph">
-                            <p>I’m working on this project to refactor and prepare for open source.</p>
-                        </div>
-                    </blockquote>
-                </div>
-                <div class="paragraph">
-                    <p>Our company has dozens of custom build flows for android application. In practice, we find:</p>
-                </div>
-                <div class="olist arabic">
-                    <ol class="arabic">
-                        <li>
-                            <p>so much feature cannot be implemented without depends on the internal source of the android plugin, which produces
-                                many compatibility issues</p>
-                        </li>
-                        <li>
-                            <p>when modifying the Android extension and variants, every feature should take care the execution order of the <code>apply</code>, <code>afterEvaluate</code> action
-                                relativize to the android’s action</p>
-                        </li>
-                        <li>
-                            <p>the code implementing the business are always separate among <code>apply</code>, <code>afterEvaluate</code>,
-                                <code>TaskGraph.whenReady</code>, which produces unreadable and fragile code</p>
-                        </li>
-                        <li>
-                            <p>in integrating tests, it’s so hard to generate android projects and check the artifacts produced by the build</p>
-                        </li>
-                    </ol>
-                </div>
-                <div class="paragraph">
-                    <p>So I create a development kit to solve these issue and speed up the development and extending the Android build process.</p>
-                </div>
-                <div class="sect3">
-                    <h4 id="_components">Components</h4>
-                    <div class="sect4">
-                        <h5 id="_compatible_layer">compatible layer</h5>
-                        <div class="paragraph">
-                            <p>A compatible layer for some android plugin internal or hiding API, and also some other plugin, such as providing universal APIs to register annotation processor and arguments no matter whether users use the <code>kapt</code> plugin.</p>
-                        </div>
-                        <div class="paragraph">
-                            <p>The kit is responsible for keeping and testing the compatibilities with different versions of the Android Gradle Plugin.</p>
-                        </div>
-                    </div>
-                    <div class="sect4">
-                        <h5 id="_annotations_based_plugin_entry_and_dependency_inject">annotations based plugin entry and dependency inject</h5>
-                        <div class="paragraph">
-                            <p>The kit provides annotations to mark a method as entry and will ensure the execution order relative to Android. You can also offer a human-friendly description by annotations.</p>
-                        </div>
-                        <div class="paragraph">
-                            <p>There is a sample.</p>
-                        </div>
-                        <div class="listingblock">
-                            <div class="content">
+<div id="toc" class="toc">
+<div id="toctitle">Table of Contents</div>
+<ul class="sectlevel1">
+<li><a href="#_gradle_plugin_based_project">Gradle Plugin Based Project</a>
+<ul class="sectlevel2">
+<li><a href="#_development_kit_for_extending_android_gradle_plugin">Development Kit for Extending Android Gradle Plugin</a></li>
+<li><a href="#_universal_library_integrating_solution">Universal Library Integrating Solution</a></li>
+<li><a href="#_distributed_smoke_test_solution">Distributed Smoke Test Solution</a></li>
+<li><a href="#_gradle_plugin_for_android_componentsviews_obfuscation">Gradle Plugin for Android Components/Views Obfuscation</a></li>
+<li><a href="#_gradle_plugin_for_variant_aware_android_library_publish">Gradle Plugin for Variant-Aware Android Library Publish</a></li>
+</ul>
+</li>
+<li><a href="#_others">Others</a>
+<ul class="sectlevel2">
+<li><a href="#_intellij_idea_plugin">Intellij IDEA Plugin</a></li>
+<li><a href="#_android_polymerized_ad_sdk">Android Polymerized Ad SDK</a></li>
+<li><a href="#_android_anti_cheating_sdk">Android Anti-cheating SDK</a></li>
+<li><a href="#_android_crash_collector_sdk">Android Crash Collector SDK</a></li>
+<li><a href="#_android_linked_wakening_sdk">Android Linked Wakening SDK</a></li>
+<li><a href="#_android_app_one_moment_video_shot">Android App: <code>One Moment</code> Video Shot</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>This an introduction to my work projects since all the projects are closed source. And the main goal is to prove that I have abilities to propose solutions to meet the complex requirements and am well qualified for developing about Gradle.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_gradle_plugin_based_project">Gradle Plugin Based Project</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>I write more than 20 close sourced Gradle plugins when working at APUS Group. I pick some of them.</p>
+</div>
+<div class="sect2">
+<h3 id="_development_kit_for_extending_android_gradle_plugin">Development Kit for Extending Android Gradle Plugin</h3>
+<div class="quoteblock">
+<blockquote>
+<div class="paragraph">
+<p>I’m working on this project to refactor and prepare for open source.</p>
+</div>
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Our company has dozens of custom build flows for android application. In practice, we find:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>so much feature cannot be implemented without depends on the internal source of the android plugin, which produces
+many compatibility issues</p>
+</li>
+<li>
+<p>when modifying the Android extension and variants, every feature should take care the execution order of the <code>apply</code>, <code>afterEvaluate</code> action
+relativize to the android’s action</p>
+</li>
+<li>
+<p>the code implementing the business are always separate among <code>apply</code>, <code>afterEvaluate</code>,
+<code>TaskGraph.whenReady</code>, which produces unreadable and fragile code</p>
+</li>
+<li>
+<p>in integrating tests, it’s so hard to generate android projects and check the artifacts produced by the build</p>
+</li>
+</ol>
+</div>
+<div class="paragraph">
+<p>So I create a development kit to solve these issue and speed up the development and extending the Android build process.</p>
+</div>
+<div class="sect3">
+<h4 id="_components">Components</h4>
+<div class="sect4">
+<h5 id="_compatible_layer">compatible layer</h5>
+<div class="paragraph">
+<p>A compatible layer for some android plugin internal or hiding API, and also some other plugin, such as providing universal APIs to register annotation processor and arguments no matter whether users use the <code>kapt</code> plugin.</p>
+</div>
+<div class="paragraph">
+<p>The kit is responsible for keeping and testing the compatibilities with different versions of the Android Gradle Plugin.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_annotations_based_plugin_entry_and_dependency_inject">annotations based plugin entry and dependency inject</h5>
+<div class="paragraph">
+<p>The kit provides annotations to mark a method as entry and will ensure the execution order relative to Android. You can also offer a human-friendly description by annotations.</p>
+</div>
+<div class="paragraph">
+<p>There is a sample.</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">@Description("A Foo Feature Providing do fool things.")
 public class FooFeature implements AndroidFeature {
 
@@ -122,26 +121,26 @@ public class FooFeature implements AndroidFeature {
         assembleAlpha.doLast(...)
     }
 }</code></pre>
-                            </div>
-                        </div>
-                        <div class="paragraph">
-                            <p>You notice that there are some annotations to describing when the action executes relating to Android. It’s
-                                important to make your modification visible for the Android plugin.</p>
-                        </div>
-                        <div class="paragraph">
-                            <p>To extending the Android build process, we need to retrieve many objects from the android plugin, such as
-                                extension, task, variant and variant data where developers have to read many sources of android plugin
-                                to find out how to access.</p>
-                        </div>
-                        <div class="paragraph">
-                            <p>So the kit provides dependencies injection to reduce repetitive and error-prone codes.</p>
-                        </div>
-                        <div class="paragraph">
-                            <p>For example, if you want to retrieve the <code>ApplicationVariant</code> collections and do something.
-                                Without the kit, you have to do like this:</p>
-                        </div>
-                        <div class="listingblock">
-                            <div class="content">
+</div>
+</div>
+<div class="paragraph">
+<p>You notice that there are some annotations to describing when the action executes relating to Android. It’s
+important to make your modification visible for the Android plugin.</p>
+</div>
+<div class="paragraph">
+<p>To extending the Android build process, we need to retrieve many objects from the android plugin, such as
+extension, task, variant and variant data where developers have to read many sources of android plugin
+to find out how to access.</p>
+</div>
+<div class="paragraph">
+<p>So the kit provides dependencies injection to reduce repetitive and error-prone codes.</p>
+</div>
+<div class="paragraph">
+<p>For example, if you want to retrieve the <code>ApplicationVariant</code> collections and do something.
+Without the kit, you have to do like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">project.getPlugins().withId("com.android.application", new Action&lt;Plugin&gt;() {
         @Override
         public void execute(Plugin plugin) {
@@ -150,13 +149,13 @@ public class FooFeature implements AndroidFeature {
             // ... do somethings with variants
         }
     });</code></pre>
-                            </div>
-                        </div>
-                        <div class="paragraph">
-                            <p>And for the <code>LibraryVariant</code> collections in an android library project, you should make some changes:</p>
-                        </div>
-                        <div class="listingblock">
-                            <div class="content">
+</div>
+</div>
+<div class="paragraph">
+<p>And for the <code>LibraryVariant</code> collections in an android library project, you should make some changes:</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">project.getPlugins().withId("com.android.library", new Action&lt;Plugin&gt;() {
         @Override
         public void execute(Plugin plugin) {
@@ -165,95 +164,95 @@ public class FooFeature implements AndroidFeature {
             // ... do somethings with variants
         }
     });</code></pre>
-                            </div>
-                        </div>
-                        <div class="paragraph">
-                            <p>There, you must use <code>withId</code>, or <code>whenPluginAdded</code>, because you cannot assume android plugin
-                                applied in advance. And as for some feature which needs BaseVariant, you have to register
-                                the code into both of the cases of the different plugins.</p>
-                        </div>
-                        <div class="paragraph">
-                            <p>And you still have trouble with how to throw an exception if there is neither <code>com.android.application</code> nor <code>com.android.library</code> plugin. In the above code, your code will only silently be ignored.
-                                You may waste time to figure out why your plugin does not work just because users forget to apply the android plugin.</p>
-                        </div>
-                        <div class="paragraph">
-                            <p>Powered by our development kit, you can simply:</p>
-                        </div>
-                        <div class="listingblock">
-                            <div class="content">
+</div>
+</div>
+<div class="paragraph">
+<p>There, you must use <code>withId</code>, or <code>whenPluginAdded</code>, because you cannot assume android plugin
+applied in advance. And as for some feature which needs BaseVariant, you have to register
+the code into both of the cases of the different plugins.</p>
+</div>
+<div class="paragraph">
+<p>And you still have trouble with how to throw an exception if there is neither <code>com.android.application</code> nor <code>com.android.library</code> plugin. In the above code, your code will only silently be ignored.
+ You may waste time to figure out why your plugin does not work just because users forget to apply the android plugin.</p>
+</div>
+<div class="paragraph">
+<p>Powered by our development kit, you can simply:</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre>@EvaluatedAction
 public void doSomethingWithBaseVariant(DomainObjectSet&lt;BaseVariant&gt; variants) {
     varinats.all(variant -&gt; {
         // do somethigns with variant
     })
 }</pre>
-                            </div>
-                        </div>
-                        <div class="paragraph">
-                            <p>When <code>BaseVariant</code> cannot be found in the project(aka. not an android project), the code will fail
-                                for unable to resolve all required arguments.</p>
-                        </div>
-                        <div class="paragraph">
-                            <p>The injected objects include:</p>
-                        </div>
-                        <div class="ulist">
-                            <ul>
-                                <li>
-                                    <p>what is commonly used by extending the android plugin,</p>
-                                </li>
-                                <li>
-                                    <p>everything provided by Gradle’s <code>ServiceRegistry</code></p>
-                                </li>
-                                <li>
-                                    <p>other universal services offered by this development kit</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="paragraph">
-                            <p>In early versions, the dependencies injection is provided by a simple JSR-330 implementation written
-                                by myself from scratch. At now, I migrate it to Google Guice.</p>
-                        </div>
-                    </div>
-                    <div class="sect4">
-                        <h5 id="_some_common_services">some common services</h5>
-                        <div class="ulist">
-                            <ul>
-                                <li>
-                                    <p>runtime requirement check, such as Gradle version, AGP version</p>
-                                </li>
-                                <li>
-                                    <p>plugin update check</p>
-                                </li>
-                                <li>
-                                    <p>some build script check, such as the order of plugin applied</p>
-                                </li>
-                                <li>
-                                    <p>common build exception and performance issue diagnostics</p>
-                                </li>
-                                <li>
-                                    <p>document/guide generating for feature and property/extension</p>
-                                </li>
-                                <li>
-                                    <p>human-readable feature description and status reports</p>
-                                </li>
-                                <li>
-                                    <p>…​</p>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="sect4">
-                        <h5 id="_a_set_of_tests_utils_and_dsl">a set of tests utils and DSL</h5>
-                        <div class="paragraph">
-                            <p>Gradle officially only provides TestKit and ProjectBuilder to boot a Gradle build. I create many useful
-                                DSL for writing tests and craft some android specific project generators and assertions which
-                                make writing tests easier.</p>
-                        </div>
-                        <div class="paragraph">
-                            <p>There is a sample for writing test with the kit.</p>
-                        </div>
-                        <div class="listingblock">
-                            <div class="content">
+</div>
+</div>
+<div class="paragraph">
+<p>When <code>BaseVariant</code> cannot be found in the project(aka. not an android project), the code will fail
+for unable to resolve all required arguments.</p>
+</div>
+<div class="paragraph">
+<p>The injected objects include:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>what is commonly used by extending the android plugin,</p>
+</li>
+<li>
+<p>everything provided by Gradle’s <code>ServiceRegistry</code></p>
+</li>
+<li>
+<p>other universal services offered by this development kit</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>In early versions, the dependencies injection is provided by a simple JSR-330 implementation written
+by myself from scratch. At now, I migrate it to Google Guice.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_some_common_services">some common services</h5>
+<div class="ulist">
+<ul>
+<li>
+<p>runtime requirement check, such as Gradle version, AGP version</p>
+</li>
+<li>
+<p>plugin update check</p>
+</li>
+<li>
+<p>some build script check, such as the order of plugin applied</p>
+</li>
+<li>
+<p>common build exception and performance issue diagnostics</p>
+</li>
+<li>
+<p>document/guide generating for feature and property/extension</p>
+</li>
+<li>
+<p>human-readable feature description and status reports</p>
+</li>
+<li>
+<p>…​</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_a_set_of_tests_utils_and_dsl">a set of tests utils and DSL</h5>
+<div class="paragraph">
+<p>Gradle officially only provides TestKit and ProjectBuilder to boot a Gradle build. I create many useful
+DSL for writing tests and craft some android specific project generators and assertions which
+make writing tests easier.</p>
+</div>
+<div class="paragraph">
+<p>There is a sample for writing test with the kit.</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre class="highlightjs highlight"><code data-lang="groovy" class="language-groovy hljs">class ComponentsObfuscateFeatureSpec extends AbstractSingleFeatureSpec { <i class="conum" data-value="1"></i><b>(1)</b>
     def "obfuscate android activity in external module"() {
         given:
@@ -300,196 +299,196 @@ apply plugin: "android-componments-obfuscaton"
         }
     }
 }</code></pre>
-                            </div>
-                        </div>
-                        <div class="colist arabic">
-                            <table>
-                                <tbody><tr>
-                                    <td><i class="conum" data-value="1"></i><b>1</b></td>
-                                    <td>abstract parent spec will generate example application, includes an empty activity, necessary resource, AndroidManifest and build.gradle file.</td>
-                                </tr>
-                                <tr>
-                                    <td><i class="conum" data-value="2"></i><b>2</b></td>
-                                    <td>DSL to declare maven repository in tests. The maven library produced by the closure will be published in the maven repo</td>
-                                </tr>
-                                <tr>
-                                    <td><i class="conum" data-value="3"></i><b>3</b></td>
-                                    <td>DSL to create classes.jar for Android library. The sources generated by the closure will be compiled and bundled as classes.jar</td>
-                                </tr>
-                                <tr>
-                                    <td><i class="conum" data-value="4"></i><b>4</b></td>
-                                    <td>DSL to generate sources files from string</td>
-                                </tr>
-                                <tr>
-                                    <td><i class="conum" data-value="5"></i><b>5</b></td>
-                                    <td>DSL to generate AndroidManifest file</td>
-                                </tr>
-                                <tr>
-                                    <td><i class="conum" data-value="6"></i><b>6</b></td>
-                                    <td>you can declare a dependency on the maven library that generated by the above code</td>
-                                </tr>
-                                <tr>
-                                    <td><i class="conum" data-value="7"></i><b>7</b></td>
-                                    <td>DSL to verify flatten apk archives, the code in the closure will run against the decompressed apk file</td>
-                                </tr>
-                                <tr>
-                                    <td><i class="conum" data-value="8"></i><b>8</b></td>
-                                    <td>DSL to verify dex file, the code in the closure will run against the parsed DexFile</td>
-                                </tr>
-                                </tbody></table>
-                        </div>
-                        <div class="paragraph">
-                            <p>Thanks to the kit, all features of plugins I written are covered by unit and integration tests which will be
-                                run against the supported version range of the Android Plugin on Jenkins CI.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="sect3">
-                    <h4 id="_multiple_modules_annotations_process_solution">Multiple Modules Annotations Process Solution</h4>
-                    <div class="quoteblock abstract">
-                        <blockquote>
-                            I introduce it first because many of the following depend on this.
-                        </blockquote>
-                    </div>
-                    <div class="paragraph">
-                        <p>Given the example project structure:</p>
-                    </div>
-                    <div class="listingblock">
-                        <div class="content">
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>abstract parent spec will generate example application, includes an empty activity, necessary resource, AndroidManifest and build.gradle file.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>DSL to declare maven repository in tests. The maven library produced by the closure will be published in the maven repo</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>DSL to create classes.jar for Android library. The sources generated by the closure will be compiled and bundled as classes.jar</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>DSL to generate sources files from string</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>DSL to generate AndroidManifest file</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="6"></i><b>6</b></td>
+<td>you can declare a dependency on the maven library that generated by the above code</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="7"></i><b>7</b></td>
+<td>DSL to verify flatten apk archives, the code in the closure will run against the decompressed apk file</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="8"></i><b>8</b></td>
+<td>DSL to verify dex file, the code in the closure will run against the parsed DexFile</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>Thanks to the kit, all features of plugins I written are covered by unit and integration tests which will be
+run against the supported version range of the Android Plugin on Jenkins CI.</p>
+</div>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_multiple_modules_annotations_process_solution">Multiple Modules Annotations Process Solution</h4>
+<div class="quoteblock abstract">
+<blockquote>
+I introduce it first because many of the following depend on this.
+</blockquote>
+</div>
+<div class="paragraph">
+<p>Given the example project structure:</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre>CompileClasspath
 - project A
 |--- project B
 - project B</pre>
-                        </div>
-                    </div>
-                    <div class="paragraph">
-                        <p>In project B, there is a class:</p>
-                    </div>
-                    <div class="listingblock">
-                        <div class="content">
+</div>
+</div>
+<div class="paragraph">
+<p>In project B, there is a class:</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">@Entry
 public class B1Entry implements Runnable {
     public void run(){}
 }</code></pre>
-                        </div>
-                    </div>
-                    <div class="paragraph">
-                        <p>In project A, it needs to generate:</p>
-                    </div>
-                    <div class="listingblock">
-                        <div class="content">
+</div>
+</div>
+<div class="paragraph">
+<p>In project A, it needs to generate:</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">// generated code
 public class MainEntry {
     public void runAllEntry() {
         new BEntry().run();
     }
 }</code></pre>
-                        </div>
-                    </div>
-                    <div class="paragraph">
-                        <p>It is pretty simple by annotation process if all classes are in the same module.</p>
-                    </div>
-                    <div class="paragraph">
-                        <p>But annotations are processed when compiling. When module A compiling, the B
-                            has compiled over. The A consumes the compiled class jar rather than source codes.</p>
-                    </div>
-                    <div class="paragraph">
-                        <p>To solve this problem, we have to store these annotations information to the artifacts of the B module. It can be the origin
-                            annotation name and parameters or processed necessary words.</p>
-                    </div>
-                    <div class="paragraph">
-                        <p>We write a special annotations processor to run when compiling the B module. The processor generates a file
-                            to record the annotations in B module. The file format can be JSON, XML, properties, or any others.</p>
-                    </div>
-                    <div class="paragraph">
-                        <p>And then, put it into the produced artifacts. As for android archive bundle(<code>.aar</code>), we add a new file into the archives.</p>
-                    </div>
-                    <div class="listingblock">
-                        <div class="title">files in the produced .aar file</div>
-                        <div class="content">
+</div>
+</div>
+<div class="paragraph">
+<p>It is pretty simple by annotation process if all classes are in the same module.</p>
+</div>
+<div class="paragraph">
+<p>But annotations are processed when compiling. When module A compiling, the B
+has compiled over. The A consumes the compiled class jar rather than source codes.</p>
+</div>
+<div class="paragraph">
+<p>To solve this problem, we have to store these annotations information to the artifacts of the B module. It can be the origin
+annotation name and parameters or processed necessary words.</p>
+</div>
+<div class="paragraph">
+<p>We write a special annotations processor to run when compiling the B module. The processor generates a file
+to record the annotations in B module. The file format can be JSON, XML, properties, or any others.</p>
+</div>
+<div class="paragraph">
+<p>And then, put it into the produced artifacts. As for android archive bundle(<code>.aar</code>), we add a new file into the archives.</p>
+</div>
+<div class="listingblock">
+<div class="title">files in the produced .aar file</div>
+<div class="content">
 <pre>- classes.jar
 - resources.zip
 - AndroidManifest.xml
 ...
 - extra_annotations.json <i class="conum" data-value="1"></i><b>(1)</b></pre>
-                        </div>
-                    </div>
-                    <div class="colist arabic">
-                        <table>
-                            <tbody><tr>
-                                <td><i class="conum" data-value="1"></i><b>1</b></td>
-                                <td>added by our plugin</td>
-                            </tr>
-                            </tbody></table>
-                    </div>
-                    <div class="paragraph">
-                        <p>In module A, we create a Task to collect all the <code>extra_annotations.json</code> by <code>artifactView</code> and
-                            attribution API. And then, merge the information and pass to annotation process by arguments.</p>
-                    </div>
-                    <div class="paragraph">
-                        <p>This project is just like the <code>annotations.zip</code> file in AAR which Google has done the same things.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="sect2">
-                <h3 id="_universal_library_integrating_solution">Universal Library Integrating Solution</h3>
-                <div class="quoteblock abstract">
-                    <blockquote>
-                        When developing an android app, there are many dependent libraries to integrate, such as Google Firebase,
-                        Facebook Audience Network SDK. Our company provides more than 30 private libraries for android application.
-                        To integrate those android libraries, you must read the document of every library and write
-                        code to configure or initialize each. If you do it from scratch, it may take about one week.
-                    </blockquote>
-                </div>
-                <div class="paragraph">
-                    <p>The project gives the ability to library developers to define how to integrate and initialize code
-                        just in their library and distributed alongside the maven dependencies. Developers can change how
-                        and when the library initialize without breaking the consumer’s code during version iteration.
-                        This project may be one of the best practices of the Inversion of Control (IoC).</p>
-                </div>
-                <div class="paragraph">
-                    <p>As for application developers, when integrating libraries, this project reduces the parameters or configs to a minimum and hides almost everything by code generating. In most cases, the codes in <code>android.app.application</code> is cut from one thousand lines to several lines.</p>
-                </div>
-                <div class="sect3">
-                    <h4 id="_my_duty">My Duty</h4>
-                    <div class="paragraph">
-                        <p>Two people write this project. I’m the project leader, proposer, and primary developer.</p>
-                    </div>
-                </div>
-                <div class="sect3">
-                    <h4 id="_architecture">Architecture</h4>
-                    <div class="paragraph">
-                        <p>Below is the architecture figure for the solutions.</p>
-                    </div>
-                    <div class="sect4">
-                        <h5 id="_layer_1_service_registry">Layer 1: Service Registry</h5>
-                        <div class="paragraph">
-                            <p>Provides some standard service interfaces need by SDK and a stub implementation.</p>
-                        </div>
-                    </div>
-                    <div class="sect4">
-                        <h5 id="_layer_2_sdks">Layer 2: SDKs</h5>
-                        <div class="paragraph">
-                            <p>These SDK can implement the interface in ServiceRegistry and use annotations to mark:</p>
-                        </div>
-                        <div class="ulist">
-                            <ul>
-                                <li>
-                                    <p>the factory method to create SDK instance.</p>
-                                </li>
-                                <li>
-                                    <p>the entry should be called at android application lifecycle</p>
-                                </li>
-                                <li>
-                                    <p>arguments it needs</p>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="paragraph">
-                            <p>Below is a sample for one SDK:</p>
-                        </div>
-                        <div class="listingblock">
-                            <div class="content">
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>added by our plugin</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>In module A, we create a Task to collect all the <code>extra_annotations.json</code> by <code>artifactView</code> and
+attribution API. And then, merge the information and pass to annotation process by arguments.</p>
+</div>
+<div class="paragraph">
+<p>This project is just like the <code>annotations.zip</code> file in AAR which Google has done the same things.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_universal_library_integrating_solution">Universal Library Integrating Solution</h3>
+<div class="quoteblock abstract">
+<blockquote>
+When developing an android app, there are many dependent libraries to integrate, such as Google Firebase,
+Facebook Audience Network SDK. Our company provides more than 30 private libraries for android application.
+To integrate those android libraries, you must read the document of every library and write
+code to configure or initialize each. If you do it from scratch, it may take about one week.
+</blockquote>
+</div>
+<div class="paragraph">
+<p>The project gives the ability to library developers to define how to integrate and initialize code
+just in their library and distributed alongside the maven dependencies. Developers can change how
+and when the library initialize without breaking the consumer’s code during version iteration.
+This project may be one of the best practices of the Inversion of Control (IoC).</p>
+</div>
+<div class="paragraph">
+<p>As for application developers, when integrating libraries, this project reduces the parameters or configs to a minimum and hides almost everything by code generating. In most cases, the codes in <code>android.app.application</code> is cut from one thousand lines to several lines.</p>
+</div>
+<div class="sect3">
+<h4 id="_my_duty">My Duty</h4>
+<div class="paragraph">
+<p>Two people write this project. I’m the project leader, proposer, and primary developer.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_architecture">Architecture</h4>
+<div class="paragraph">
+<p>Below is the architecture figure for the solutions.</p>
+</div>
+<div class="sect4">
+<h5 id="_layer_1_service_registry">Layer 1: Service Registry</h5>
+<div class="paragraph">
+<p>Provides some standard service interfaces need by SDK and a stub implementation.</p>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_layer_2_sdks">Layer 2: SDKs</h5>
+<div class="paragraph">
+<p>These SDK can implement the interface in ServiceRegistry and use annotations to mark:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>the factory method to create SDK instance.</p>
+</li>
+<li>
+<p>the entry should be called at android application lifecycle</p>
+</li>
+<li>
+<p>arguments it needs</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>Below is a sample for one SDK:</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">public class DemoCrashCollectSDK implements ICrashCollectAPI {
     DemoCrashCollectSDK(ServiceProvider&lt;UserTracker&gt; userTracker,
             ServiceProvider&lt;AppInfo&gt; appInfo) {
@@ -515,19 +514,19 @@ public class MainEntry {
         collectionBootInfo();
     }
 }</code></pre>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sect4">
-                        <h5 id="_layer_3_android_application">Layer 3: Android Application</h5>
-                        <div class="paragraph">
-                            <p>For application developers, the only things to do is call the setup method of the whole platform. The code generator will take care of delivering events to every SDK.</p>
-                        </div>
-                        <div class="paragraph">
-                            <p>Below a sample for application:</p>
-                        </div>
-                        <div class="listingblock">
-                            <div class="content">
+</div>
+</div>
+</div>
+<div class="sect4">
+<h5 id="_layer_3_android_application">Layer 3: Android Application</h5>
+<div class="paragraph">
+<p>For application developers, the only things to do is call the setup method of the whole platform. The code generator will take care of delivering events to every SDK.</p>
+</div>
+<div class="paragraph">
+<p>Below a sample for application:</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre class="highlightjs highlight"><code data-lang="java" class="language-java hljs">public class MyApplication extends android.app.Application {
 
     @Override
@@ -546,149 +545,149 @@ public class MainEntry {
         PlatformService.applicationOnCreate().invoke();
     }
 }</code></pre>
-                            </div>
-                        </div>
-                        <div class="paragraph">
-                            <p>The code of behind <code>PlatformService.applicationAttachBaseContextBuilder(context)</code>
-                                is generated when building, and it will call every SDK only if the SDK is in your <code>CompileClasspath</code>.</p>
-                        </div>
-                        <div class="paragraph">
-                            <p>How the annotations in the library are handed over between modules has been introduced in the previous project.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="sect2">
-                <h3 id="_distributed_smoke_test_solution">Distributed Smoke Test Solution</h3>
-                <div class="quoteblock abstract">
-                    <blockquote>
-                        Our team does not just provide libraries for other department and also takes responsibility for the
-                        wrong usage, missing configuration, and any other possibility that break down our libraries functions.
-                        We cannot assume other teams will write code for the library(Exactly, I’m the only one in our company who write tests).
-                    </blockquote>
-                </div>
-                <div class="literalblock">
-                    <div class="content">
+</div>
+</div>
+<div class="paragraph">
+<p>The code of behind <code>PlatformService.applicationAttachBaseContextBuilder(context)</code>
+is generated when building, and it will call every SDK only if the SDK is in your <code>CompileClasspath</code>.</p>
+</div>
+<div class="paragraph">
+<p>How the annotations in the library are handed over between modules has been introduced in the previous project.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_distributed_smoke_test_solution">Distributed Smoke Test Solution</h3>
+<div class="quoteblock abstract">
+<blockquote>
+Our team does not just provide libraries for other department and also takes responsibility for the
+  wrong usage, missing configuration, and any other possibility that break down our libraries functions.
+ We cannot assume other teams will write code for the library(Exactly, I’m the only one in our company who write tests).
+</blockquote>
+</div>
+<div class="literalblock">
+<div class="content">
 <pre>This framework gives developers the ability to distribute smoke tests along with the maven libraries.
 The tests are regressive and protect the most vital function from wrong configurations or bad usages.</pre>
-                    </div>
-                </div>
-                <div class="sect3">
-                    <h4 id="_my_duty_2">My Duty</h4>
-                    <div class="paragraph">
-                        <p>Two people write this project. I’m the project leader, proposer, and primary developer.</p>
-                    </div>
-                </div>
-                <div class="sect3">
-                    <h4 id="_features">Features</h4>
-                    <div class="olist arabic">
-                        <ol class="arabic">
-                            <li>
-                                <p>Library developer can write android tests case which will run against the produced android app</p>
-                            </li>
-                            <li>
-                                <p>Do not conflict with origin unit/integrate tests of the library</p>
-                            </li>
-                            <li>
-                                <p>Tests can be delivered and distributed along with maven library. No need for addition dependencies declaration in consume</p>
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-                <div class="sect3">
-                    <h4 id="_components_2">Components</h4>
-                    <div class="dlist">
-                        <dl>
-                            <dt class="hdlist1">Gradle plugin for android library build (for library developer)</dt>
-                            <dd>
-                                <p>Any android library can declare <code>verifiedBy</code> dependency to record the smoke test dependencies.</p>
-                                <div class="listingblock">
-                                    <div class="content">
+</div>
+</div>
+<div class="sect3">
+<h4 id="_my_duty_2">My Duty</h4>
+<div class="paragraph">
+<p>Two people write this project. I’m the project leader, proposer, and primary developer.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_features">Features</h4>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Library developer can write android tests case which will run against the produced android app</p>
+</li>
+<li>
+<p>Do not conflict with origin unit/integrate tests of the library</p>
+</li>
+<li>
+<p>Tests can be delivered and distributed along with maven library. No need for addition dependencies declaration in consume</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_components_2">Components</h4>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Gradle plugin for android library build (for library developer)</dt>
+<dd>
+<p>Any android library can declare <code>verifiedBy</code> dependency to record the smoke test dependencies.</p>
+<div class="listingblock">
+<div class="content">
 <pre class="highlightjs highlight"><code data-lang="groovy" class="language-groovy hljs">dependencies {
   verifiedBy project(':verifiesTest')
 }</code></pre>
-                                    </div>
-                                </div>
-                                <div class="paragraph">
-                                    <p>And when publishing, an addition dependency will be added into maven pom as <code>test</code> dependency.</p>
-                                </div>
-                            </dd>
-                            <dt class="hdlist1">Gradle plugin for smoke test module(for library developer)</dt>
-                            <dd>
-                                <p>The module will be compiled and bundled as an android AAR library.</p>
-                            </dd>
-                            <dt class="hdlist1">Gradle plugin for android application build (for app developer)</dt>
-                            <dd>
-                                <p>The plugin will:</p>
-                                <div class="ulist">
-                                    <ul>
-                                        <li>
-                                            <p>create addition <code>androidTest</code>(which is only be created for debug build type) variant
-                                                for release build type as special <code>verifyTest</code> variant</p>
-                                        </li>
-                                        <li>
-                                            <p>extract the <code>test</code> dependencies from maven dependencies in <code>compileClasspath</code>, and add them to <code>verifyTestImplementation</code></p>
-                                        </li>
-                                        <li>
-                                            <p>create tasks to run the smoke tests all together or separately, and collect the result</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </dd>
-                            <dt class="hdlist1">a handy test library</dt>
-                            <dd>
-                                <p>to accomplish complicated user operations(based on Espresso/UIAutomator)</p>
-                            </dd>
-                            <dt class="hdlist1">a Jenkins plugin</dt>
-                            <dd>
-                                <p>to demonstrate the result and a Jenkins workflow to run the smoke test for every build</p>
-                            </dd>
-                        </dl>
-                    </div>
-                </div>
-            </div>
-            <div class="sect2">
-                <h3 id="_gradle_plugin_for_android_componentsviews_obfuscation">Gradle Plugin for Android Components/Views Obfuscation</h3>
-                <div class="paragraph">
-                    <p>By default, Android Plugin for Gradle will never obfuscate the Android components(activity, service, content-provider, and receiver)
-                        Class name and their members. This Plugin hacks this and allows Proguard/R8 to obfuscate them.</p>
-                </div>
-                <div class="sect3">
-                    <h4 id="_implementation_scratch">Implementation Scratch</h4>
-                    <div class="paragraph">
-                        <p>In the Android build process, we concern these tasks:</p>
-                    </div>
-                    <div class="listingblock">
-                        <div class="content">
+</div>
+</div>
+<div class="paragraph">
+<p>And when publishing, an addition dependency will be added into maven pom as <code>test</code> dependency.</p>
+</div>
+</dd>
+<dt class="hdlist1">Gradle plugin for smoke test module(for library developer)</dt>
+<dd>
+<p>The module will be compiled and bundled as an android AAR library.</p>
+</dd>
+<dt class="hdlist1">Gradle plugin for android application build (for app developer)</dt>
+<dd>
+<p>The plugin will:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>create addition <code>androidTest</code>(which is only be created for debug build type) variant
+for release build type as special <code>verifyTest</code> variant</p>
+</li>
+<li>
+<p>extract the <code>test</code> dependencies from maven dependencies in <code>compileClasspath</code>, and add them to <code>verifyTestImplementation</code></p>
+</li>
+<li>
+<p>create tasks to run the smoke tests all together or separately, and collect the result</p>
+</li>
+</ul>
+</div>
+</dd>
+<dt class="hdlist1">a handy test library</dt>
+<dd>
+<p>to accomplish complicated user operations(based on Espresso/UIAutomator)</p>
+</dd>
+<dt class="hdlist1">a Jenkins plugin</dt>
+<dd>
+<p>to demonstrate the result and a Jenkins workflow to run the smoke test for every build</p>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gradle_plugin_for_android_componentsviews_obfuscation">Gradle Plugin for Android Components/Views Obfuscation</h3>
+<div class="paragraph">
+<p>By default, Android Plugin for Gradle will never obfuscate the Android components(activity, service, content-provider, and receiver)
+Class name and their members. This Plugin hacks this and allows Proguard/R8 to obfuscate them.</p>
+</div>
+<div class="sect3">
+<h4 id="_implementation_scratch">Implementation Scratch</h4>
+<div class="paragraph">
+<p>In the Android build process, we concern these tasks:</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre>:processReleaseManifest <i class="conum" data-value="1"></i><b>(1)</b>
 :mergeReleaseResources
 :processReleaseResources <i class="conum" data-value="2"></i><b>(2)</b>
 :compileReleaseJavaWithJavac
 :transformResourcesWithMergeJavaResForRelease
 :transformClassesAndResourcesWithProguardForRelease <i class="conum" data-value="3"></i><b>(3)</b></pre>
-                        </div>
-                    </div>
-                    <div class="colist arabic">
-                        <table>
-                            <tbody><tr>
-                                <td><i class="conum" data-value="1"></i><b>1</b></td>
-                                <td>generate <code>AndroidManifest.xml</code> file</td>
-                            </tr>
-                            <tr>
-                                <td><i class="conum" data-value="2"></i><b>2</b></td>
-                                <td>compile android resource to <code>resource.ap_</code>, and generate <strong>addition ProGuard rules</strong></td>
-                            </tr>
-                            <tr>
-                                <td><i class="conum" data-value="3"></i><b>3</b></td>
-                                <td>use ProGuard/R8 to process java source and java resource(not android resource), and generate <code>mapping.txt</code></td>
-                            </tr>
-                            </tbody></table>
-                    </div>
-                    <div class="paragraph">
-                        <p>The ProGuard rules generated by <code>processReleaseResources</code> will keep all components and views that you use.</p>
-                    </div>
-                    <div class="listingblock">
-                        <div class="content">
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>generate <code>AndroidManifest.xml</code> file</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>compile android resource to <code>resource.ap_</code>, and generate <strong>addition ProGuard rules</strong></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>use ProGuard/R8 to process java source and java resource(not android resource), and generate <code>mapping.txt</code></td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>The ProGuard rules generated by <code>processReleaseResources</code> will keep all components and views that you use.</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre># Referenced at /Users/yiyazhou/Projects/Works/PowerPlusLauncher/app/build/intermediates/merged_manifests/release/AndroidManifest.xml:356
 -keep class com.dckaz.DazGuideActivity { &lt;init&gt;(); }
 
@@ -697,45 +696,45 @@ The tests are regressive and protect the most vital function from wrong configur
 
 # Referenced at /Users/yiyazhou/Projects/Works/PowerPlusLauncher/modules/velorum-guide/build/intermediates/packaged_res/release/layout/permission_guide_view.xml:21
 -keep class org.velorum.guide.PermissionAnimatorView { &lt;init&gt;(android.content.Context, android.util.AttributeSet); }</pre>
-                        </div>
-                    </div>
-                    <div class="paragraph">
-                        <p>If you block these rules(may just delete these rules), these class will be obfuscated but you
-                            need also modify the layout resource and AndroidManifest.xml according to the ProGuard mapping.</p>
-                    </div>
-                    <div class="paragraph">
-                        <p>Because task <code>transformClassesAndResourcesWithProguard</code> depends on <code>processManifest</code> and <code>processResources</code>,
-                            so you have to alter these file by append new task after ProGuard/R8 transformation task.</p>
-                    </div>
-                    <div class="paragraph">
-                        <p>But in this way, you have to:</p>
-                    </div>
-                    <div class="olist arabic">
-                        <ol class="arabic">
-                            <li>
-                                <p>find out a way to replace the next <code>bundleRelease</code> task inputs with what you modified.</p>
-                            </li>
-                            <li>
-                                <p>process the <code>resource.ap_</code> file: a zip with the compiled resource. The resource has been compiled
-                                    to <code>.flat</code> file.  It’s dirty to decompile them.</p>
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-                <div class="sect3">
-                    <h4 id="_final_solutions">Final Solutions</h4>
-                    <div class="paragraph">
-                        <p>Only if the obfuscating mapping were generated by ProGuard, I would not merely append action to android
-                            resource/manifest process task to alter resource file because a cycle isn’t allowed in task graph.</p>
-                    </div>
-                    <div class="paragraph">
-                        <p>So I decide to manipulate the mapping by myself, the apply it to ProGuards.</p>
-                    </div>
-                    <div class="paragraph">
-                        <p>And the final solution is like this:</p>
-                    </div>
-                    <div class="listingblock">
-                        <div class="content">
+</div>
+</div>
+<div class="paragraph">
+<p>If you block these rules(may just delete these rules), these class will be obfuscated but you
+need also modify the layout resource and AndroidManifest.xml according to the ProGuard mapping.</p>
+</div>
+<div class="paragraph">
+<p>Because task <code>transformClassesAndResourcesWithProguard</code> depends on <code>processManifest</code> and <code>processResources</code>,
+so you have to alter these file by append new task after ProGuard/R8 transformation task.</p>
+</div>
+<div class="paragraph">
+<p>But in this way, you have to:</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>find out a way to replace the next <code>bundleRelease</code> task inputs with what you modified.</p>
+</li>
+<li>
+<p>process the <code>resource.ap_</code> file: a zip with the compiled resource. The resource has been compiled
+to <code>.flat</code> file.  It’s dirty to decompile them.</p>
+</li>
+</ol>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_final_solutions">Final Solutions</h4>
+<div class="paragraph">
+<p>Only if the obfuscating mapping were generated by ProGuard, I would not merely append action to android
+resource/manifest process task to alter resource file because a cycle isn’t allowed in task graph.</p>
+</div>
+<div class="paragraph">
+<p>So I decide to manipulate the mapping by myself, the apply it to ProGuards.</p>
+</div>
+<div class="paragraph">
+<p>And the final solution is like this:</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre>:processReleaseManifest <i class="conum" data-value="1"></i><b>(1)</b>
 :mergeReleaseResources
 :processReleaseResources <i class="conum" data-value="2"></i><b>(2)</b><i class="conum" data-value="3"></i><b>(3)</b>
@@ -743,56 +742,56 @@ The tests are regressive and protect the most vital function from wrong configur
 :appendInMapToProguardRulesForRelease <i class="conum" data-value="4"></i><b>(4)</b>
 :transformResourcesWithMergeJavaResForRelease
 :transformClassesAndResourcesWithProguardForRelease</pre>
-                        </div>
-                    </div>
-                    <div class="colist arabic">
-                        <table>
-                            <tbody><tr>
-                                <td><i class="conum" data-value="1"></i><b>1</b></td>
-                                <td>replace all components in AndroidManifest.xml and record to self-managed mapping.</td>
-                            </tr>
-                            <tr>
-                                <td><i class="conum" data-value="2"></i><b>2</b></td>
-                                <td>replace all custom views in layout.xml and record to self-managed mapping.</td>
-                            </tr>
-                            <tr>
-                                <td><i class="conum" data-value="3"></i><b>3</b></td>
-                                <td>new task to modify android generated ProGuard rules to keep just necessary constructors.</td>
-                            </tr>
-                            <tr>
-                                <td><i class="conum" data-value="4"></i><b>4</b></td>
-                                <td>generate mapping.txt by self-managed mapping, and apply to ProGuard Transform</td>
-                            </tr>
-                            </tbody></table>
-                    </div>
-                    <div class="paragraph">
-                        <p>The <code>self-managed mapping</code> is a dictionary guaranteed to produces consistent value for input during the one-time build and also
-                            takes cares the method and class visibility after code obfuscation. Its input is origin class name, and the output is the corresponds obfuscated class name.</p>
-                    </div>
-                    <div class="paragraph">
-                        <p>In the task <code>processReleaseResources</code>, we should process all layout XML resources and alter all reference to origin class to
-                            obfuscated class. It’s impossible to modify the task input because android computes and directly reads
-                            the project sources sets(We shouldn’t change the user’s sources code, either). And it’s also tough to alter the task output since the output is binary <code>.flat</code> file.</p>
-                    </div>
-                    <div class="paragraph">
-                        <p>After deep diving the Android Plugin source, I find it’s simple to write an <code>DataBindingProcessor</code> to
-                            archive our goal. During the <code>processReleaseResources</code>, Android will call  <code>DataBindingProcessor</code> to preprocess
-                            the layout XML resources to remove data-binding expressions. It’s relatively easy to replace the data-binding processor by reflection. With the delegation pattern, there is no stumbling block to coexistence with data-binding, either.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="sect2">
-                <h3 id="_gradle_plugin_for_variant_aware_android_library_publish">Gradle Plugin for Variant-Aware Android Library Publish</h3>
-                <div class="paragraph">
-                    <p>In our company, every library should publish a release version and debug version.</p>
-                </div>
-                <div class="sect3">
-                    <h4 id="_for_gradle_3_x_agpandroid_gradle_plugin_2_x">For Gradle 3.x, AGP(Android Gradle Plugin) 2.x</h4>
-                    <div class="paragraph">
-                        <p>There is no native variant-aware support in Gradle. For the project module dependency, android publishes every variant to a different configuration. When publishing to maven, we separate it by version name suffix in the uploadArchives task.</p>
-                    </div>
-                    <div class="listingblock">
-                        <div class="content">
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tbody><tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>replace all components in AndroidManifest.xml and record to self-managed mapping.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>replace all custom views in layout.xml and record to self-managed mapping.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>new task to modify android generated ProGuard rules to keep just necessary constructors.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>generate mapping.txt by self-managed mapping, and apply to ProGuard Transform</td>
+</tr>
+</tbody></table>
+</div>
+<div class="paragraph">
+<p>The <code>self-managed mapping</code> is a dictionary guaranteed to produces consistent value for input during the one-time build and also
+takes cares the method and class visibility after code obfuscation. Its input is origin class name, and the output is the corresponds obfuscated class name.</p>
+</div>
+<div class="paragraph">
+<p>In the task <code>processReleaseResources</code>, we should process all layout XML resources and alter all reference to origin class to
+obfuscated class. It’s impossible to modify the task input because android computes and directly reads
+the project sources sets(We shouldn’t change the user’s sources code, either). And it’s also tough to alter the task output since the output is binary <code>.flat</code> file.</p>
+</div>
+<div class="paragraph">
+<p>After deep diving the Android Plugin source, I find it’s simple to write an <code>DataBindingProcessor</code> to
+archive our goal. During the <code>processReleaseResources</code>, Android will call  <code>DataBindingProcessor</code> to preprocess
+the layout XML resources to remove data-binding expressions. It’s relatively easy to replace the data-binding processor by reflection. With the delegation pattern, there is no stumbling block to coexistence with data-binding, either.</p>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_gradle_plugin_for_variant_aware_android_library_publish">Gradle Plugin for Variant-Aware Android Library Publish</h3>
+<div class="paragraph">
+<p>In our company, every library should publish a release version and debug version.</p>
+</div>
+<div class="sect3">
+<h4 id="_for_gradle_3_x_agpandroid_gradle_plugin_2_x">For Gradle 3.x, AGP(Android Gradle Plugin) 2.x</h4>
+<div class="paragraph">
+<p>There is no native variant-aware support in Gradle. For the project module dependency, android publishes every variant to a different configuration. When publishing to maven, we separate it by version name suffix in the uploadArchives task.</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre class="highlightjs highlight"><code data-lang="groovy" class="language-groovy hljs">dependencies {
     debugCompile project(':lib', configuration: 'debug')
     releaseCompile project(':lib', configuration: 'release')
@@ -800,134 +799,134 @@ The tests are regressive and protect the most vital function from wrong configur
     debugCompile 'org.example:lib:1.0.0-debug'
     releaseCompile 'org.example:lib:1.0.0-release'
 }</code></pre>
-                        </div>
-                    </div>
-                    <div class="paragraph">
-                        <p>But the variant selection may mess because of version resolution.</p>
-                    </div>
-                    <div class="paragraph">
-                        <p>For example, when resolving ''debugCompileClasspath'', there are:
-                            - org.example:lib:1.0.0-debug
-                            - org.example:lib:2.0.0-release  // some bad guys introduces by <code>compile 'org.example:lib:2.0.0-release'</code></p>
-                    </div>
-                    <div class="paragraph">
-                        <p>Gradle will resolve to <code>org.example:lib:2.0.0-release</code>.</p>
-                    </div>
-                    <div class="paragraph">
-                        <p>As for <code>debugCompileClasspath</code>, I expect everything library should be the variant of <code>debug</code>. The variant selection
-                            should not be affected by version.</p>
-                    </div>
-                </div>
-                <div class="sect3">
-                    <h4 id="_gradle_4_x_agpandroid_gradle_plugin_3_x">Gradle 4.x, AGP(Android Gradle Plugin) 3.x</h4>
-                    <div class="paragraph">
-                        <p>Native support for the variant-aware build is introduced in Gradle. So I try to migrate to Artifact Transformation
-                            API. I imagine bundling multi-variants into one archive file:</p>
-                    </div>
-                    <div class="listingblock">
-                        <div class="title">archive file contents</div>
-                        <div class="content">
+</div>
+</div>
+<div class="paragraph">
+<p>But the variant selection may mess because of version resolution.</p>
+</div>
+<div class="paragraph">
+<p>For example, when resolving ''debugCompileClasspath'', there are:
+- org.example:lib:1.0.0-debug
+- org.example:lib:2.0.0-release  // some bad guys introduces by <code>compile 'org.example:lib:2.0.0-release'</code></p>
+</div>
+<div class="paragraph">
+<p>Gradle will resolve to <code>org.example:lib:2.0.0-release</code>.</p>
+</div>
+<div class="paragraph">
+<p>As for <code>debugCompileClasspath</code>, I expect everything library should be the variant of <code>debug</code>. The variant selection
+should not be affected by version.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gradle_4_x_agpandroid_gradle_plugin_3_x">Gradle 4.x, AGP(Android Gradle Plugin) 3.x</h4>
+<div class="paragraph">
+<p>Native support for the variant-aware build is introduced in Gradle. So I try to migrate to Artifact Transformation
+API. I imagine bundling multi-variants into one archive file:</p>
+</div>
+<div class="listingblock">
+<div class="title">archive file contents</div>
+<div class="content">
 <pre>library-debug.aar
 library-release.aar</pre>
-                        </div>
-                    </div>
-                    <div class="paragraph">
-                        <p>We can name the format as <code>.bundle</code> archives. When consuming, we can use ArtifactTransform to separate
-                            the variants from the bundle file. As a result, we can write dependencies more simply.</p>
-                    </div>
-                    <div class="listingblock">
-                        <div class="content">
+</div>
+</div>
+<div class="paragraph">
+<p>We can name the format as <code>.bundle</code> archives. When consuming, we can use ArtifactTransform to separate
+the variants from the bundle file. As a result, we can write dependencies more simply.</p>
+</div>
+<div class="listingblock">
+<div class="content">
 <pre class="highlightjs highlight"><code data-lang="groovy" class="language-groovy hljs">dependencies {
    implementation 'org.example:lib:1.0.0' // no debug/release suffix any more
 }</code></pre>
-                        </div>
-                    </div>
-                    <div class="paragraph">
-                        <p>I also encountered a Gradle bug prevents me: <a href="https://github.com/gradle/gradle/issues/7061" class="bare">https://github.com/gradle/gradle/issues/7061</a>. I fixed it finally.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="sect2">
-                <h3 id="_gradle_5_3">Gradle 5.3</h3>
-                <div class="paragraph">
-                    <p>Cheers! Gradle Module Metadata 1.0 is released.</p>
-                </div>
-                <div class="paragraph">
-                    <p>I have not migrated libraries in my company to Gradle metadata format for scheduling reason, but I know it should be the final
-                        solution to publish variants libraries.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="sect1">
-        <h2 id="_others">Others</h2>
-        <div class="sectionbody">
-            <div class="paragraph">
-                <p>As an Android engineer in the past company, my other projects are mainly android libraries and applications. So I omit most details.</p>
-            </div>
-            <div class="sect2">
-                <h3 id="_intellij_idea_plugin">Intellij IDEA Plugin</h3>
-                <div class="paragraph">
-                    <p>An IDEA/Studio plugin implements:</p>
-                </div>
-                <div class="ulist">
-                    <ul>
-                        <li>
-                            <p>provide a GUI browsing panel for company internal SDK and quickly open documentation sites</p>
-                        </li>
-                        <li>
-                            <p>a one-click dependencies version update for company internal maven library for Gradle project</p>
-                        </li>
-                        <li>
-                            <p>GUI editor for a custom binary format based on Google’s FlatBuffer (this format commonly used in data transmission of our company internal SDK)</p>
-                        </li>
-                        <li>
-                            <p>grammar highlighter for flat buffer schema</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <div class="sect2">
-                <h3 id="_android_polymerized_ad_sdk">Android Polymerized Ad SDK</h3>
-                <div class="paragraph">
-                    <p>A polymerized ad SDK which provides a universal API for dozens third-party advertisement SDK and
-                        has a very complex loading and retry logic to get the best price ad among all those third-party advertising
-                        sources.</p>
-                </div>
-                <div class="paragraph">
-                    <p>Another team initially maintains it. But they cannot continue because of the terrible code style and chaotic architecture and ask me for help. I rewrite it from
-                        scratch, including unit and functional tests. I use RxJava to implement the most complex concurrent loading and retry logic.</p>
-                </div>
-            </div>
-            <div class="sect2">
-                <h3 id="_android_anti_cheating_sdk">Android Anti-cheating SDK</h3>
-                <div class="paragraph">
-                    <p>A native android library. It tracks user behavior and uploads to the server for robot recognition and
-                        commercial fraud identification.</p>
-                </div>
-                <div class="paragraph">
-                    <p>I write the verbose client SDK, which boringly collects data, builds up into flat buffer and uploads.
-                        No more interesting details here.</p>
-                </div>
-            </div>
-            <div class="sect2">
-                <h3 id="_android_crash_collector_sdk">Android Crash Collector SDK</h3>
-                <div class="paragraph">
-                    <p>To collect Android Java and Native Crash, upload and provide extensional API for other developers.</p>
-                </div>
-            </div>
-            <div class="sect2">
-                <h3 id="_android_linked_wakening_sdk">Android Linked Wakening SDK</h3>
-                <div class="paragraph">
-                    <p>A simple SDK to wake process by Android Binder Mechanism.</p>
-                </div>
-            </div>
-            <div class="sect2">
-                <h3 id="_android_app_one_moment_video_shot">Android App: <code>One Moment</code> Video Shot</h3>
-                <div class="paragraph">
-                    <p>A video shot Application when I was in college. I write it in Kotlin before Kotlin get known for everybody.
-                        It can shot video, filtering. It also has one SNS society in the app. There are a total of 100,000 users before I quit.</p>
-                </div>
-            </div>
-        </div>
-    </div></div><script type="text/javascript" id="asciidoctor-browser-highlightjs-refresh" src="js/vendor/highlight.js/refresh.js"></script></body></html>
+</div>
+</div>
+<div class="paragraph">
+<p>I also encountered a Gradle bug prevents me: <a href="https://github.com/gradle/gradle/issues/7061" class="bare">https://github.com/gradle/gradle/issues/7061</a>. I fixed it finally.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_gradle_5_3">Gradle 5.3</h4>
+<div class="paragraph">
+<p>Cheers! Gradle Module Metadata 1.0 is released.</p>
+</div>
+<div class="paragraph">
+<p>I have not migrated libraries in my company to Gradle metadata format for scheduling reason, but I know it should be the final
+solution to publish variants libraries.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_others">Others</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>As an Android engineer in the past company, my other projects are mainly android libraries and applications. So I omit most details.</p>
+</div>
+<div class="sect2">
+<h3 id="_intellij_idea_plugin">Intellij IDEA Plugin</h3>
+<div class="paragraph">
+<p>An IDEA/Studio plugin implements:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>provide a GUI browsing panel for company internal SDK and quickly open documentation sites</p>
+</li>
+<li>
+<p>a one-click dependencies version update for company internal maven library for Gradle project</p>
+</li>
+<li>
+<p>GUI editor for a custom binary format based on Google’s FlatBuffer (this format commonly used in data transmission of our company internal SDK)</p>
+</li>
+<li>
+<p>grammar highlighter for flat buffer schema</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_android_polymerized_ad_sdk">Android Polymerized Ad SDK</h3>
+<div class="paragraph">
+<p>A polymerized ad SDK which provides a universal API for dozens third-party advertisement SDK and
+has a very complex loading and retry logic to get the best price ad among all those third-party advertising
+sources.</p>
+</div>
+<div class="paragraph">
+<p>Another team initially maintains it. But they cannot continue because of the terrible code style and chaotic architecture and ask me for help. I rewrite it from
+scratch, including unit and functional tests. I use RxJava to implement the most complex concurrent loading and retry logic.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_android_anti_cheating_sdk">Android Anti-cheating SDK</h3>
+<div class="paragraph">
+<p>A native android library. It tracks user behavior and uploads to the server for robot recognition and
+commercial fraud identification.</p>
+</div>
+<div class="paragraph">
+<p>I write the verbose client SDK, which boringly collects data, builds up into flat buffer and uploads.
+ No more interesting details here.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_android_crash_collector_sdk">Android Crash Collector SDK</h3>
+<div class="paragraph">
+<p>To collect Android Java and Native Crash, upload and provide extensional API for other developers.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_android_linked_wakening_sdk">Android Linked Wakening SDK</h3>
+<div class="paragraph">
+<p>A simple SDK to wake process by Android Binder Mechanism.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_android_app_one_moment_video_shot">Android App: <code>One Moment</code> Video Shot</h3>
+<div class="paragraph">
+<p>A video shot Application when I was in college. I write it in Kotlin before Kotlin get known for everybody.
+It can shot video, filtering. It also has one SNS society in the app. There are a total of 100,000 users before I quit.</p>
+</div>
+</div>
+</div>
+</div></div><script type="text/javascript" id="asciidoctor-browser-highlightjs-refresh" src="js/vendor/highlight.js/refresh.js"></script><script type="text/javascript" id="asciidoctor-browser-highlightjs-refresh" src="js/vendor/highlight.js/refresh.js"></script></body></html>
