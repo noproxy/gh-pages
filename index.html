@@ -431,18 +431,18 @@ attribution API, and then, merge the information and pass to annotation process 
 <blockquote>
 When developing an android app, there are many dependent libraries to integrate, such as Google Firebase,
 Facebook Audience Network SDK. Our company provides more than 30 private libraries for android application.
-To integrate those android libraries, you must read the document of every library and write
-code to configure or initialize each. If you do it from scratch, it may take about one week.
+To integrate those android libraries, you have to read the document of every library and write
+code to configure or initialize each. It may take about one week to start from scratch.
 </blockquote>
 </div>
 <div class="paragraph">
 <p>The project gives the ability to library developers to define how to integrate and initialize code
-just in their library and distributed alongside the maven dependencies. Developers can change how
+just in their library and distribute the specification alongside the maven dependencies. Developers can change how
 and when the library initialize without breaking the consumer’s code during version iteration.
 This project may be one of the best practices of the Inversion of Control (IoC).</p>
 </div>
 <div class="paragraph">
-<p>As for application developers, when integrating libraries, this project reduces the parameters or configs to a minimum and hides almost everything by code generating. In most cases, the codes in <code>android.app.application</code> is cut from one thousand lines to several lines.</p>
+<p>As for application developers, when integrating libraries, this project reduces the parameters or configs to a minimum and hides almost everything by code generating. In most cases, the codes in <code>android.app.application</code> is cut down from more than one thousand lines to several lines.</p>
 </div>
 <div class="sect3">
 <h4 id="_my_duty">My Duty</h4>
@@ -453,18 +453,18 @@ This project may be one of the best practices of the Inversion of Control (IoC).
 <div class="sect3">
 <h4 id="_architecture">Architecture</h4>
 <div class="paragraph">
-<p>Below is the architecture figure for the solutions.</p>
+<p>The solution divides libraries and the application into three layers.</p>
 </div>
 <div class="sect4">
 <h5 id="_layer_1_service_registry">Layer 1: Service Registry</h5>
 <div class="paragraph">
-<p>Provides some standard service interfaces need by SDK and a stub implementation.</p>
+<p>Provides some standard service interfaces needed by SDK and a stub implementation.</p>
 </div>
 </div>
 <div class="sect4">
 <h5 id="_layer_2_sdks">Layer 2: SDKs</h5>
 <div class="paragraph">
-<p>These SDK can implement the interface in ServiceRegistry and use annotations to mark:</p>
+<p>These SDK can implement the interfaces in ServiceRegistry and use annotations to mark:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -480,7 +480,7 @@ This project may be one of the best practices of the Inversion of Control (IoC).
 </ul>
 </div>
 <div class="paragraph">
-<p>Below is a sample for one SDK:</p>
+<p>A sample for one SDK is below:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -515,7 +515,7 @@ This project may be one of the best practices of the Inversion of Control (IoC).
 <div class="sect4">
 <h5 id="_layer_3_android_application">Layer 3: Android Application</h5>
 <div class="paragraph">
-<p>For application developers, the only things to do is call the setup method of the whole platform. The code generator will take care of delivering events to every SDK.</p>
+<p>For application developers, the only thing to do is calling the setup method of the whole platform. The code generator will take care of delivering events to every SDK.</p>
 </div>
 <div class="paragraph">
 <p>Below a sample for application:</p>
@@ -544,7 +544,7 @@ This project may be one of the best practices of the Inversion of Control (IoC).
 </div>
 <div class="paragraph">
 <p>The code of behind <code>PlatformService.applicationAttachBaseContextBuilder(context)</code>
-is generated when building, and it will call every SDK only if the SDK is in your <code>CompileClasspath</code>.</p>
+is generated when building, and it will call every SDK only if the SDK is in the <code>CompileClasspath</code>.</p>
 </div>
 <div class="paragraph">
 <p>How the annotations in the library are handed over between modules has been introduced in the previous project.</p>
@@ -558,7 +558,7 @@ is generated when building, and it will call every SDK only if the SDK is in you
 <blockquote>
 Our team does not just provide libraries for other department and also takes responsibility for the
   wrong usage, missing configuration, and any other possibility that break down our libraries functions.
- We cannot assume other teams will write code for the library(Exactly, I’m the only one in our company who write tests).
+ We cannot assume other teams will write code for the library (Exactly, I’m the only one in our company who write tests).
 </blockquote>
 </div>
 <div class="literalblock">
@@ -578,13 +578,13 @@ The tests are regressive and protect the most vital function from wrong configur
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Library developer can write android tests case which will run against the produced android app</p>
+<p>Library developers can write android tests case which will run against the produced android app</p>
 </li>
 <li>
-<p>Do not conflict with origin unit/integrate tests of the library</p>
+<p>No conflicts with origin unit/integrate tests of the library</p>
 </li>
 <li>
-<p>Tests can be delivered and distributed along with maven library. No need for addition dependencies declaration in consume</p>
+<p>Tests can be delivered and distributed along with maven library. No need for addition dependency declaration in consume</p>
 </li>
 </ol>
 </div>
@@ -593,7 +593,7 @@ The tests are regressive and protect the most vital function from wrong configur
 <h4 id="_components_2">Components</h4>
 <div class="dlist">
 <dl>
-<dt class="hdlist1">Gradle plugin for android library build (for library developer)</dt>
+<dt class="hdlist1">Gradle plugin for android library build (for library developers)</dt>
 <dd>
 <p>Any android library can declare <code>verifiedBy</code> dependency to record the smoke test dependencies.</p>
 <div class="listingblock">
@@ -604,7 +604,7 @@ The tests are regressive and protect the most vital function from wrong configur
 </div>
 </div>
 <div class="paragraph">
-<p>And when publishing, an addition dependency will be added into maven pom as <code>test</code> dependency.</p>
+<p>And when publishing, an extra dependency will be added into maven pom as <code>test</code> dependency.</p>
 </div>
 </dd>
 <dt class="hdlist1">Gradle plugin for smoke test module(for library developer)</dt>
@@ -617,7 +617,7 @@ The tests are regressive and protect the most vital function from wrong configur
 <div class="ulist">
 <ul>
 <li>
-<p>create addition <code>androidTest</code>(which is only be created for debug build type) variant
+<p>create additional <code>androidTest</code> (which is only be created for debug build type) variant
 for release build type as special <code>verifyTest</code> variant</p>
 </li>
 <li>
@@ -631,11 +631,11 @@ for release build type as special <code>verifyTest</code> variant</p>
 </dd>
 <dt class="hdlist1">a handy test library</dt>
 <dd>
-<p>to accomplish complicated user operations(based on Espresso/UIAutomator)</p>
+<p>to accomplish complicated user operations (based on Espresso/UIAutomator)</p>
 </dd>
 <dt class="hdlist1">a Jenkins plugin</dt>
 <dd>
-<p>to demonstrate the result and a Jenkins workflow to run the smoke test for every build</p>
+<p>to demonstrate the result and a Jenkins workflow to run the smoke tests for every build</p>
 </dd>
 </dl>
 </div>
@@ -644,13 +644,13 @@ for release build type as special <code>verifyTest</code> variant</p>
 <div class="sect2">
 <h3 id="_gradle_plugin_for_android_componentsviews_obfuscation">Gradle Plugin for Android Components/Views Obfuscation</h3>
 <div class="paragraph">
-<p>By default, Android Plugin for Gradle will never obfuscate the Android components(activity, service, content-provider, and receiver)
-Class name and their members. This Plugin hacks this and allows Proguard/R8 to obfuscate them.</p>
+<p>By default, Android Plugin for Gradle will never obfuscate the Android components (activity, service, content-provider, and receiver)
+Class name and their members. This Plugin hack this and allows Proguard/R8 to obfuscate them.</p>
 </div>
 <div class="sect3">
 <h4 id="_implementation_scratch">Implementation Scratch</h4>
 <div class="paragraph">
-<p>In the Android build process, we concern these tasks:</p>
+<p>In the Android build process, we concern about these tasks:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -670,7 +670,7 @@ Class name and their members. This Plugin hacks this and allows Proguard/R8 to o
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
-<td>compile android resource to <code>resource.ap_</code>, and generate <strong>addition ProGuard rules</strong></td>
+<td>compile android resource to <code>resource.ap_</code>, and generate <strong>additional ProGuard rules</strong></td>
 </tr>
 <tr>
 <td><i class="conum" data-value="3"></i><b>3</b></td>
@@ -679,7 +679,7 @@ Class name and their members. This Plugin hacks this and allows Proguard/R8 to o
 </tbody></table>
 </div>
 <div class="paragraph">
-<p>The ProGuard rules generated by <code>processReleaseResources</code> will keep all components and views that you use.</p>
+<p>The ProGuard rules generated by <code>processReleaseResources</code> will keep all the components and views that are used in layout resources.</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -699,10 +699,10 @@ need also modify the layout resource and AndroidManifest.xml according to the Pr
 </div>
 <div class="paragraph">
 <p>Because task <code>transformClassesAndResourcesWithProguard</code> depends on <code>processManifest</code> and <code>processResources</code>,
-so you have to alter these file by append new task after ProGuard/R8 transformation task.</p>
+so you have to alter these files by append new task after ProGuard/R8 transformation task.</p>
 </div>
 <div class="paragraph">
-<p>But in this way, you have to:</p>
+<p>But in this way, we have to:</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
@@ -723,7 +723,7 @@ to <code>.flat</code> file.  It’s dirty to decompile them.</p>
 resource/manifest process task to alter resource file because a cycle isn’t allowed in task graph.</p>
 </div>
 <div class="paragraph">
-<p>So I decide to manipulate the mapping by myself, the apply it to ProGuards.</p>
+<p>So I decided to manipulate the mapping by myself, the apply it to ProGuards.</p>
 </div>
 <div class="paragraph">
 <p>And the final solution is like this:</p>
@@ -760,16 +760,16 @@ resource/manifest process task to alter resource file because a cycle isn’t al
 </tbody></table>
 </div>
 <div class="paragraph">
-<p>The <code>self-managed mapping</code> is a dictionary guaranteed to produces consistent value for input during the one-time build and also
-takes cares the method and class visibility after code obfuscation. Its input is origin class name, and the output is the corresponds obfuscated class name.</p>
+<p>The <code>self-managed mapping</code> is a dictionary guaranteed to produce consistent value for input during the one-time build and also
+takes care of the method and class visibility after code obfuscation. Its input is origin class name, and the output is the corresponding obfuscated class name.</p>
 </div>
 <div class="paragraph">
-<p>In the task <code>processReleaseResources</code>, we should process all layout XML resources and alter all reference to origin class to
-obfuscated class. It’s impossible to modify the task input because android computes and directly reads
+<p>In the <code>processReleaseResources</code> task, we should process all the layout XML resources and alter all reference to origin class to
+obfuscated class. It’s impossible to modify the task inputs because android computes and directly reads
 the project sources sets(We shouldn’t change the user’s sources code, either). And it’s also tough to alter the task output since the output is binary <code>.flat</code> file.</p>
 </div>
 <div class="paragraph">
-<p>After deep diving the Android Plugin source, I find it’s simple to write an <code>DataBindingProcessor</code> to
+<p>After deep diving into the Android Plugin source, I found it’s simple to write an <code>DataBindingProcessor</code> to
 archive our goal. During the <code>processReleaseResources</code>, Android will call  <code>DataBindingProcessor</code> to preprocess
 the layout XML resources to remove data-binding expressions. It’s relatively easy to replace the data-binding processor by reflection. With the delegation pattern, there is no stumbling block to coexistence with data-binding, either.</p>
 </div>
@@ -797,7 +797,7 @@ the layout XML resources to remove data-binding expressions. It’s relatively e
 </div>
 </div>
 <div class="paragraph">
-<p>But the variant selection may mess because of version resolution.</p>
+<p>But the variant selection may be messed up because of version resolution.</p>
 </div>
 <div class="paragraph">
 <p>For example, when resolving ''debugCompileClasspath'', there are:
@@ -808,7 +808,7 @@ the layout XML resources to remove data-binding expressions. It’s relatively e
 <p>Gradle will resolve to <code>org.example:lib:2.0.0-release</code>.</p>
 </div>
 <div class="paragraph">
-<p>As for <code>debugCompileClasspath</code>, I expect everything library should be the variant of <code>debug</code>. The variant selection
+<p>As for <code>debugCompileClasspath</code>, I expect every library should be the variant of <code>debug</code>. The variant selection
 should not be affected by version.</p>
 </div>
 </div>
@@ -870,7 +870,7 @@ solution to publish variants libraries.</p>
 <p>provide a GUI browsing panel for company internal SDK and quickly open documentation sites</p>
 </li>
 <li>
-<p>a one-click dependencies version update for company internal maven library for Gradle project</p>
+<p>one-click dependency version update for company internal maven library for Gradle project</p>
 </li>
 <li>
 <p>GUI editor for a custom binary format based on Google’s FlatBuffer (this format commonly used in data transmission of our company internal SDK)</p>
@@ -889,7 +889,7 @@ has a very complex loading and retry logic to get the best price ad among all th
 sources.</p>
 </div>
 <div class="paragraph">
-<p>Another team initially maintains it. But they cannot continue because of the terrible code style and chaotic architecture and ask me for help. I rewrite it from
+<p>Another team initially maintains it. But they are trapped with the terrible code style and chaotic architecture and ask me for help. I rewrite it from
 scratch, including unit and functional tests. I use RxJava to implement the most complex concurrent loading and retry logic.</p>
 </div>
 </div>
@@ -919,8 +919,8 @@ commercial fraud identification.</p>
 <div class="sect2">
 <h3 id="_android_app_one_moment_video_shot">Android App: <code>One Moment</code> Video Shot</h3>
 <div class="paragraph">
-<p>A video shot Application when I was in college. I write it in Kotlin before Kotlin get known for everybody.
-It can shot video, filtering. It also has one SNS society in the app. There are a total of 100,000 users before I quit.</p>
+<p>A video shot Application when I was in college. I wrote it in Kotlin before Kotlin got prevalent.
+It can shot video and filter. It also has one SNS society in the app. There is a total of 100,000 users before I quit.</p>
 </div>
 </div>
 </div>
