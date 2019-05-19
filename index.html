@@ -82,7 +82,7 @@ relative to the android’s action</p>
 </div>
 </div>
 <div class="sect4">
-<h5 id="_annotations_based_plugin_entry_and_dependency_inject">annotations based plugin entry and dependency inject</h5>
+<h5 id="_annotations_based_plugin_entry_and_dependency_inject">annotation based plugin entry and dependency inject</h5>
 <div class="paragraph">
 <p>The kit provides annotations to mark a method as entry and will ensure the execution order relative to Android. You can also offer a human-friendly description by annotations.</p>
 </div>
@@ -305,7 +305,7 @@ apply plugin: "android-componments-obfuscaton"
 <table>
 <tbody><tr>
 <td><i class="conum" data-value="1"></i><b>1</b></td>
-<td>abstract parent spec will generate example application, includes an empty activity, necessary resource, AndroidManifest and build.gradle file.</td>
+<td>abstract parent spec will generate example application, including an empty activity, necessary resource, AndroidManifest and build.gradle file.</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="2"></i><b>2</b></td>
@@ -329,27 +329,22 @@ apply plugin: "android-componments-obfuscaton"
 </tr>
 <tr>
 <td><i class="conum" data-value="7"></i><b>7</b></td>
-<td>DSL to verify flatten apk archives, the code in the closure will run against the decompressed apk file</td>
+<td>DSL to verify flatten apk archives. The code in the closure will run against the decompressed apk file</td>
 </tr>
 <tr>
 <td><i class="conum" data-value="8"></i><b>8</b></td>
-<td>DSL to verify dex file, the code in the closure will run against the parsed DexFile</td>
+<td>DSL to verify dex file. The code in the closure will run against the parsed DexFile</td>
 </tr>
 </tbody></table>
 </div>
 <div class="paragraph">
 <p>Thanks to the kit, all features of plugins I written are covered by unit and integration tests which will be
-run against the supported version range of the Android Plugin on Jenkins CI.</p>
+run against the range of supported version of the Android Plugin on Jenkins CI.</p>
 </div>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_multiple_modules_annotations_process_solution">Multiple Modules Annotations Process Solution</h4>
-<div class="quoteblock abstract">
-<blockquote>
-I introduce it first because many of the following depend on this.
-</blockquote>
-</div>
 <div class="paragraph">
 <p>Given the example project structure:</p>
 </div>
@@ -393,11 +388,11 @@ public class MainEntry {
 has compiled over. The A consumes the compiled class jar rather than source codes.</p>
 </div>
 <div class="paragraph">
-<p>To solve this problem, we have to store these annotations information to the artifacts of the B module. It can be the origin
+<p>To solve this problem, we have to store the annotation information to the artifacts of the B module. It can be the origin
 annotation name and parameters or processed necessary words.</p>
 </div>
 <div class="paragraph">
-<p>We write a special annotations processor to run when compiling the B module. The processor generates a file
+<p>We wrote a special annotation processor to run when compiling the B module. The processor generates a file
 to record the annotations in B module. The file format can be JSON, XML, properties, or any others.</p>
 </div>
 <div class="paragraph">
@@ -423,7 +418,7 @@ to record the annotations in B module. The file format can be JSON, XML, propert
 </div>
 <div class="paragraph">
 <p>In module A, we create a Task to collect all the <code>extra_annotations.json</code> by <code>artifactView</code> and
-attribution API. And then, merge the information and pass to annotation process by arguments.</p>
+attribution API, and then, merge the information and pass to annotation process by arguments.</p>
 </div>
 <div class="paragraph">
 <p>This project is just like the <code>annotations.zip</code> file in AAR which Google has done the same things.</p>
